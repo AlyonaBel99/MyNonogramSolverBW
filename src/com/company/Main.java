@@ -10,9 +10,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         Scanner in = new Scanner(System.in);
-        System.out.print("Загрузить картинку? (да или нет): ");
+        System.out.print("Загрузить картинку? (yes или not): ");
         String answer = in.nextLine();
-        if (answer.equals("да") == true){
+        if (answer.equals("yes") == true){
         System.out.println("\tВы выбрали создание кроссворда из картинки");
             System.out.print("Введите имя файла с расширением (например images.png): ");
             String name =in.nextLine();// имя файла
@@ -25,24 +25,31 @@ public class Main {
             //получаем путь новой измененной картинки
             String fileName = changePicture.getRenderFileName();
             //создание кроссворда
+            //System.out.print(fileName);
             CreatCrossword creatCrossword = new CreatCrossword(fileName);
             //создание файла с сырыми данными  и возврат строки с названием файла
             fileName = fileName.substring(fileName.indexOf('/') + 1);
             fileName = fileName.substring(fileName.indexOf('/') + 1);
+            fileName = fileName.substring(fileName.indexOf('/') + 1);
+
             String fileRowData = creatCrossword.saveRawData(fileName);
             //сохраняем кроссворд в виде картинки и возврат строки названием файла
+            //System.out.print(fileName);
             String fileNonogramImage= creatCrossword.saveImage(fileName);
             //System.out.print(fileNonogramImage);
             //вызов класса для решения кроссворда
             NonogramSolver nonogramSolver = new NonogramSolver();
+            //System.out.println(fileRowData);
             nonogramSolver.NonogramReadRowData(fileRowData); // метод который десериализует данные кроссворда
+            //System.out.println(fileNonogramImage);
             nonogramSolver.Run();// запуск решателя
+
             nonogramSolver.saveResult(fileNonogramImage);// сохранение решенного кроссворда
-            System.out.println("Измененая картика лежит в папке Pictures\\Modified_pictures\n" +
-                    "Кроссворд с сырыми данными лежит в папке RowData\n" +
-                    "Кроссворд лежит в папке Nonograms\\crossword\n" +
-                    "Решенный кроссворд лежит в папке Nonograms\\solved_crossword");
-        }else if (answer.equals("нет") == true){
+            System.out.println("Измененая картика лежит в папке doc\\Pictures\\Modified_pictures\n" +
+                    "Кроссворд с сырыми данными лежит в папке doc\\RowData\n" +
+                    "Кроссворд лежит в папке doc\\Nonograms\\crossword\n" +
+                    "Решенный кроссворд лежит в папке doc\\Nonograms\\solved_crossword");
+        }else if (answer.equals("not") == true){
             System.out.println("\tВы выбрали решение кроссворда из текстового файла");
             System.out.print("Введите имя файла с расширением (например Goat.txt): ");
             String fileTxt =in.nextLine(); // имя файла
@@ -53,8 +60,8 @@ public class Main {
             nonogramSolver.Run(); // запуск решателя
             String rendFileTxt = fileTxt.substring(0, fileTxt.indexOf('.')); // создание нового имя файла
             nonogramSolver.saveResult(rendFileTxt); // сохранение решенного кроссворда
-            System.out.println("Кроссворд лежит в папке Nonograms\\crossword\n" +
-                    "Решенный кроссворд лежит в папке Nonograms\\solved_crossword");
+            System.out.println("Кроссворд лежит в папке doc\\Nonograms\\crossword\n" +
+                    "Решенный кроссворд лежит в папке doc\\Nonograms\\solved_crossword");
         }
     }
 }
