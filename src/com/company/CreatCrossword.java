@@ -134,7 +134,7 @@ public class CreatCrossword {
     }
     public String saveRawData(String nameFileRawData)  {
         //создание имя файла
-        String renderFileName = "doc/RowData/"+ nameFileRawData.substring(0, nameFileRawData.indexOf('.')) +"RawData" + ".dat";
+        String renderFileName = nameFileRawData.substring(0, nameFileRawData.indexOf('.')) +"RawData" + ".dat";
         //System.out.println(renderFileName);
         // сериализация кроссворда
         Nonogram serialization = new Nonogram(yHints, xHints);
@@ -156,12 +156,12 @@ public class CreatCrossword {
     }
 
     public String saveImage(String nameFileImage) throws IOException {
-        String renderFileName = "doc/Nonograms/crossword/Nonogram_" + nameFileImage.substring(0, nameFileImage.indexOf('.')) ;
+        String renderFileName =  nameFileImage.substring(0, nameFileImage.indexOf('.'))+"_Nonogram" ;
         //System.out.println(renderFileName);
         CreatImage creatImage = new CreatImage(yHints,xHints,renderFileName);
-        renderFileName = renderFileName.substring(renderFileName.indexOf('/') + 1);
-        renderFileName = renderFileName.substring(renderFileName.indexOf('/') + 1);
-        renderFileName = renderFileName.substring(renderFileName.indexOf('/') + 1);
+//        renderFileName = renderFileName.substring(renderFileName.indexOf('/') + 1);
+//        renderFileName = renderFileName.substring(renderFileName.indexOf('/') + 1);
+//        renderFileName = renderFileName.substring(renderFileName.indexOf('/') + 1);
         return renderFileName;
     }
 }

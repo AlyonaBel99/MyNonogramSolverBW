@@ -14,54 +14,60 @@ public class Main {
         String answer = in.nextLine();
         if (answer.equals("yes") == true){
         System.out.println("\tВы выбрали создание кроссворда из картинки");
-            System.out.print("Введите имя файла с расширением (например images.png): ");
-            String name =in.nextLine();// имя файла
+            System.out.print("Введите путь к файлу с расширением (например C:\\images.png): ");
+
+            String name =in.nextLine();// путь к файлу
+
             System.out.print("Введите ширину создоваемого кроссворда (например 15): ");
             int Widht = in.nextInt();
             System.out.print("Введите высоту создоваемого кроссворда(например 15): ");
             int Height = in.nextInt();
+
             //вызываем класс который изменит картинку
             ChangePicture changePicture = new ChangePicture(name,Widht,Height);
-            //получаем путь новой измененной картинки
-            String fileName = changePicture.getRenderFileName();
-            //создание кроссворда
-            //System.out.print(fileName);
-            CreatCrossword creatCrossword = new CreatCrossword(fileName);
-            //создание файла с сырыми данными  и возврат строки с названием файла
-            fileName = fileName.substring(fileName.indexOf('/') + 1);
-            fileName = fileName.substring(fileName.indexOf('/') + 1);
-            fileName = fileName.substring(fileName.indexOf('/') + 1);
 
+            //получаем путь к новой измененной картинки(изменяется только название картинки)
+            String fileName = changePicture.getRenderFileName();
+
+            //создание кроссворда
+            CreatCrossword creatCrossword = new CreatCrossword(fileName);
+
+           /* fileName = fileName.substring(fileName.indexOf('/') + 1);
+            fileName = fileName.substring(fileName.indexOf('/') + 1);
+            fileName = fileName.substring(fileName.indexOf('/') + 1);*/
+
+            //создание файла с сырыми данными
+            // и получаем путь к новой измененной картинки(изменяется только название картинки)
             String fileRowData = creatCrossword.saveRawData(fileName);
+
             //сохраняем кроссворд в виде картинки и возврат строки названием файла
-            //System.out.print(fileName);
             String fileNonogramImage= creatCrossword.saveImage(fileName);
-            //System.out.print(fileNonogramImage);
+
             //вызов класса для решения кроссворда
             NonogramSolver nonogramSolver = new NonogramSolver();
-            //System.out.println(fileRowData);
+
             nonogramSolver.NonogramReadRowData(fileRowData); // метод который десериализует данные кроссворда
-            //System.out.println(fileNonogramImage);
+
             nonogramSolver.Run();// запуск решателя
 
             nonogramSolver.saveResult(fileNonogramImage);// сохранение решенного кроссворда
-            System.out.println("Измененая картика лежит в папке doc\\Pictures\\Modified_pictures\n" +
-                    "Кроссворд с сырыми данными лежит в папке doc\\RowData\n" +
-                    "Кроссворд лежит в папке doc\\Nonograms\\crossword\n" +
-                    "Решенный кроссворд лежит в папке doc\\Nonograms\\solved_crossword");
+
+            System.out.println("Измененная картинка, сырые данные, кроссворд и решенный " +
+                    "кроссворд находятся там же, где и картинка, путь к которой вы ранее указали, а именно: " +
+                    name);
         }else if (answer.equals("not") == true){
             System.out.println("\tВы выбрали решение кроссворда из текстового файла");
-            System.out.print("Введите имя файла с расширением (например Goat.txt): ");
+            System.out.print("Введите путь к файлу с расширением (например C:\\Goat.txt): ");
             String fileTxt =in.nextLine(); // имя файла
             // для решения кроссворда из текстового файла
             NonogramSolver nonogramSolver = new NonogramSolver();
-            nonogramSolver.NonogramReadTxt(fileTxt); // вызов метода, который читает кроссворд из файла
+            nonogramSolver.NonogramReadTxt(fileTxt); // вызов метода, который читает кроссворд из файла а потом сохранит его в виде картинки
 
             nonogramSolver.Run(); // запуск решателя
             String rendFileTxt = fileTxt.substring(0, fileTxt.indexOf('.')); // создание нового имя файла
             nonogramSolver.saveResult(rendFileTxt); // сохранение решенного кроссворда
-            System.out.println("Кроссворд лежит в папке doc\\Nonograms\\crossword\n" +
-                    "Решенный кроссворд лежит в папке doc\\Nonograms\\solved_crossword");
+            System.out.println("Кроссворд и решенный кроссвор находятся там же, где и текстовый файл," +
+                    " путь к которой вы ранее указали, а именно: " + fileTxt);
         }
     }
 }

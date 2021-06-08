@@ -50,7 +50,7 @@ public class NonogramSolver {
     }
 
     public void saveResult(String file) throws IOException {
-        String renderFileName = "doc/Nonograms/solved_crossword/Result_" +file ;
+        String renderFileName =  file +"_Result";
 
         //System.out.print(renderFileName);
         CreatImage creatImage=new CreatImage(this.yHints,this.xHints,renderFileName,result);
@@ -64,7 +64,7 @@ public class NonogramSolver {
         BufferedReader br = null;
         try {
             String sCurrentLine;
-            br = new BufferedReader(new FileReader(new File("doc/NonogramTxt/" +fileName)));
+            br = new BufferedReader(new FileReader(new File(fileName)));
             while ((sCurrentLine = br.readLine()) != null) {
                 /*if (sCurrentLine.startsWith("width")) {
                     Column = Integer.parseInt(sCurrentLine.split(" ")[1]);
@@ -121,7 +121,7 @@ public class NonogramSolver {
         //System.out.println(yHints);
         //System.out.println(fileName);
 
-        fileName = "doc/Nonograms/crossword/"+fileName.substring(0, fileName.indexOf('.'));
+        fileName = fileName.substring(0, fileName.indexOf('.') )+ "_Nonogram";
         CreatImage creatImage = new CreatImage(this.yHints,this.xHints,fileName);
     }
 

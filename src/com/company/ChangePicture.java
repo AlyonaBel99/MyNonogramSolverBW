@@ -13,7 +13,8 @@ public class ChangePicture {
         try {
 
             // Открываем изображение
-        File file = new File("doc/Pictures/"+ fileName);
+        //File file = new File("doc/Pictures/"+ fileName);
+            File file = new File(fileName);
         BufferedImage source = null;
             source = ImageIO.read(file);
 
@@ -25,9 +26,8 @@ public class ChangePicture {
 
         //создаем название новой картинки
 
-
-
-        renderFileName =  "doc/Pictures/Modified_pictures/"+fileName.substring(0, fileName.indexOf('.')) +"Render" + ".png";
+        //renderFileName =  "doc/Pictures/Modified_pictures/"+fileName.substring(0, fileName.indexOf('.')) +"Render" + ".png";
+            renderFileName =  fileName.substring(0, fileName.indexOf('.')) +"Render" + ".png";
         // сохраняем картинку
         ImageIO.write(im, "PNG", new File(renderFileName));
 
