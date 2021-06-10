@@ -49,7 +49,7 @@ public class CreatImage {
         Width = lenW + xHints.size()*picsel + 1;
         Height = lenH + yHints.size()*picsel + 1;
         //System.out.println(xHints.size() + " - "+Width + "  " +Height);
-        BufferedImage bufferedImage = new BufferedImage(Width,Height,BufferedImage.TYPE_INT_ARGB);
+        BufferedImage bufferedImage = new BufferedImage(Width,Height,BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d = bufferedImage.createGraphics();
         g2d.setColor(Color.white);
         g2d.fillRect(0,0,Width,Height);

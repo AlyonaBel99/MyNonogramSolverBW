@@ -23,12 +23,14 @@ public class Main {
             System.out.print("Введите высоту создоваемого кроссворда(например 15): ");
             int Height = in.nextInt();
 
+            System.out.println(name);
             //вызываем класс который изменит картинку
             ChangePicture changePicture = new ChangePicture(name,Widht,Height);
 
             //получаем путь к новой измененной картинки(изменяется только название картинки)
             String fileName = changePicture.getRenderFileName();
 
+            System.out.println(fileName);
             //создание кроссворда
             CreatCrossword creatCrossword = new CreatCrossword(fileName);
 
@@ -48,7 +50,10 @@ public class Main {
 
             nonogramSolver.NonogramReadRowData(fileRowData); // метод который десериализует данные кроссворда
 
+            long m = System.currentTimeMillis();//установка времени
             nonogramSolver.Run();// запуск решателя
+            System.out.println("Время за которое решился кроссворд: "
+                    + (System.currentTimeMillis() - m)/1000 + " сек.");
 
             nonogramSolver.saveResult(fileNonogramImage);// сохранение решенного кроссворда
 
